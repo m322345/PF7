@@ -1,0 +1,11 @@
+__pycache__
+.ipynb_checkpoints/
+mlruns/
+Data/Source
+Data/Db
+Untitled*.ipynb
+Api/Data/Model/requirements.txt
+Api/Data/Model/python_env.yaml
+Api/Data/Model/conda.yaml
+Api/Data/Model/MLmodel
+Temp/
