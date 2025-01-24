@@ -226,13 +226,17 @@ def main():
                         #fig, ax = plt.subplots(figsize=(5, 5))
                         #st.pyplot(fig)
 
+
+                with st.spinner("Merci de patienter, nous calculons l'importance des variables ... "):
+                    model = loadModel(pathMod+'model.pkl')
+                    shap_values_single, shap_values, explainer = visualize_importance(model, user_id, ClientsDatabase)
+
+
                 st.subheader("Explication variable", divider="blue")
-                with st.spinner("Merci de patienter, nous calculons l'explication locale ... "):
+                with st.spinner("Merci de patienter, nous calculons l'explication des variables ... "):
                     listeVars = GetItems(ClientsDatabase)
                     listeVars.insert(0, 'Cliquez ici pour choisir')
                     var2Analys = st.selectbox('Variable a analyser :',listeVars, index=0)
-                    model = loadModel(pathMod+'model.pkl')
-                    shap_values_single, shap_values, explainer = visualize_importance(model, user_id, ClientsDatabase)
                     if var2Analys == 'Cliquez ici pour choisir':
                         st.write(f"Choisissez une variable dans le menu déroulant ci-dessus")
                     else:
