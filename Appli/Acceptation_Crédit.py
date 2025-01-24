@@ -235,8 +235,8 @@ def main():
                 st.subheader("Explication variable", divider="blue")
                 with st.spinner("Merci de patienter, nous calculons l'explication des variables ... "):
                     listeVars = GetItems(ClientsDatabase)
-                    listeVars = listeVars.remove("SK_ID_CURR")
-                    listeVars = listeVars.remove("TARGET")
+                    #listeVars = listeVars.remove("SK_ID_CURR")
+                    #listeVars = listeVars.remove("TARGET")
                     listeVars.insert(0, 'Cliquez ici pour choisir')
                     var2Analys = st.selectbox('Variable a analyser :',listeVars, index=0)
                     if var2Analys == 'Cliquez ici pour choisir':
