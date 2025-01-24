@@ -230,7 +230,7 @@ def main():
                 with st.spinner("Merci de patienter, nous calculons l'explication locale ... "):
                     st.subheader("Explication variable", divider="blue")
                     model = loadModel(pathMod+'model.pkl')
-                    shap_values_single, shap_values = visualize_importance(model, user_id, ClientsDatabase)
+                    shap_values_single, shap_values, explainer = visualize_importance(model, user_id, ClientsDatabase)
                     fig, ax = plt.subplots(figsize=(5, 5))
                     shap.plots.scatter(shap_values[:, "EXT_SOURCE_1"])
                     st.pyplot(fig)
