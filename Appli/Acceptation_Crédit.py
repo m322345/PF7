@@ -168,7 +168,7 @@ def main():
                     with col2:
                         st.write(f"Patrimoine total : {baliseDeb}{DetailClient.AMT_INCOME_TOTAL.values[0]}{baliseFin} $", unsafe_allow_html=True)
                         st.write(f"Type(s) de contrat(s) obtenus:", unsafe_allow_html=True)
-                        st.write(f"{baliseDeb}{SearchRightCol(DetailClient,'NAME_CONTRACT_TYPE').replace('PREV','  \n').replace('MEAN','')}{baliseFin}", unsafe_allow_html=True)
+                        st.write(f"{baliseDeb}{SearchRightCol(DetailClient,'NAME_CONTRACT_TYPE').replace("PREV","  \n").replace("MEAN","")}{baliseFin}", unsafe_allow_html=True)
                         st.write(f"Montant: {baliseDeb}{DetailClient['AMT_CREDIT'].values[0]}{baliseFin} $", unsafe_allow_html=True)
                         st.write(f"Montant annuel: {baliseDeb}{DetailClient['AMT_ANNUITY'].values[0]}{baliseFin} $", unsafe_allow_html=True)
                         st.write(f"Ratio credit sur revenus: {baliseDeb}{round(DetailClient['ANNUITY_INCOME_PERC'].values[0],2)}{baliseFin}", unsafe_allow_html=True)
