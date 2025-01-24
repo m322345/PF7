@@ -212,11 +212,14 @@ def main():
                         dfGraph = ClientsDatabase[options].agg(['min', 'mean', 'max'])
                         dfGraph = dfGraph._append(ClientsDatabase.loc[ClientsDatabase.SK_ID_CURR == pred['client_id'],options])
                         dfGraph.rename(index={id_user:'client'}, inplace=True)
-                        dfGraph = dfGraph.T
-                        st.write(dfGraph.T)
+                        dfGraph=dfGraph.T
+                        dfGraph['amplitude']=dfGraph['max']-dfGraph['min']
+                        dfGraph['mid_prc']=(dfGraph['mean']-dfGraph['min'])/dfGraph['amplitude']
+                        dfGraph['client_prc']=(dfGraph['client']-dfGraph['min'])/dfGraph['amplitude']
+                        st.write(dfGraph)
                         dataGraph = go.Figure(go.Bar(
                             y=dfGraph.index,
-                            x=dfGraph['client'],
+                            x=dfGraph['client_prc','mid_prc'],
                             marker_color='red'
                         ))
                         st.plotly_chart(dataGraph, use_container_width=False, theme="streamlit", on_select="ignore")
