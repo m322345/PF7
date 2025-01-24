@@ -207,7 +207,6 @@ def main():
                     if len(options) == 0:
                         st.write(f"Choisissez au moins une variable dans le menu déroulant ci-dessus")
                     else:
-                        
                         dfGraph = pd.DataFrame()
                         id_user = ClientsDatabase.loc[ClientsDatabase.SK_ID_CURR == pred['client_id']].index[0]
                         dfGraph = ClientsDatabase[options].agg(['min', 'mean', 'max'])
@@ -231,12 +230,15 @@ def main():
                     st.subheader("Explication variable", divider="blue")
                     listeVars = GetItems(ClientsDatabase)
                     listeVars.insert(0, 'Cliquez ici pour choisir')
-                    var2Analys = st.sidebar.selectbox('Variable a analyser :',listeVars, index=0)
+                    var2Analys = st.selectbox('Variable a analyser :',listeVars, index=0)
                     model = loadModel(pathMod+'model.pkl')
                     shap_values_single, shap_values, explainer = visualize_importance(model, user_id, ClientsDatabase)
-                    fig, ax = plt.subplots(figsize=(5, 5))
-                    shap.plots.scatter(shap_values[:, var2Analys])
-                    st.pyplot(fig)
+                    if len(var2Analys) == 0:
+                        st.write(f"Choisissez une variable dans le menu déroulant ci-dessus")
+                    else:
+                        fig, ax = plt.subplots(figsize=(5, 5))
+                        shap.plots.scatter(shap_values[:, 'CODE_GENDER'])
+                        st.pyplot(fig)
 
 
                 with st.spinner("Merci de patienter, nous calculons l'explication locale ... "):
