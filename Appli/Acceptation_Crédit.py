@@ -11,6 +11,7 @@ import lightgbm
 from pathlib import Path
 import pickle
 
+
 def get_file_number(filename):
     """recuperation du seuil etabli lors de l'elaboration du modele"""
     f = open(filename)
@@ -52,13 +53,7 @@ def visualize_importance(modele, id, donnees):
     explainer = shap.Explainer(prediction, moyennes)
     shap_values_single = explainer(Client(id,donnees), max_evals=1500)
     shap_values = explainer(X, max_evals=1500)
-    X_test_courant = Client(id,donnees)
-    X_test_courant_array = X_test_courant.values.reshape(1, -1)
-    shap_values_courant = explainer.shap_values(X_test_courant_array)
-    st.pyplot(shap.plots.force(explainer.expected_value[1],shap_values_courant[1],Client(id,donnees), matplotlib=True)) 
-    shap.decision_plot(explainer.expected_value[1], shap_values_courant[1], Client(id,donnees))
-    st.pyplot()
-    return shap_values_single, shap_values
+    return shap_values_single, shap_values, explainer
 
 
 def DropColumns(dataset):
@@ -233,8 +228,17 @@ def main():
                         #st.pyplot(fig)
 
                 with st.spinner("Merci de patienter, nous calculons l'explication locale ... "):
+                    st.subheader("Explication variable", divider="blue")
                     model = loadModel(pathMod+'model.pkl')
                     shap_values_single, shap_values = visualize_importance(model, user_id, ClientsDatabase)
+                    fig, ax = plt.subplots(figsize=(5, 5))
+                    shap.plots.scatter(shap_values[:, "EXT_SOURCE_1"])
+                    st.pyplot(fig)
+
+
+                with st.spinner("Merci de patienter, nous calculons l'explication locale ... "):
+#                    model = loadModel(pathMod+'model.pkl')
+#                    shap_values_single, shap_values, explainer = visualize_importance(model, user_id, ClientsDatabase)
                     st.subheader("Explication Locale", divider="blue")
                     fig, ax = plt.subplots(figsize=(5, 5))
                     shap.plots.waterfall(shap_values_single[0], max_display=10)

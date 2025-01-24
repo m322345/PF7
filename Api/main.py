@@ -44,3 +44,22 @@ def return_pred(client_id: int):
         else:
             status = "Accordée"
         return {"client_id": client_id, "risk": risk, "status": status}
+
+@app.get("/detail/{client_data}")
+def return_pred(client_id: int):
+    ClientsDatabaseList = list(ClientsDatabase['SK_ID_CURR'].unique())
+
+    if client_id == 999: # Client test pour test unitaire
+        return {"client_id": client_id, "risk": "risky", "status": "TestUser"}
+    elif client_id not in ClientsDatabaseList: # Client inconnu de la base
+        return {"error": "Client inconnu de notre base"}
+    else:
+        X = ClientsDatabase[ClientsDatabase['SK_ID_CURR'] == client_id]
+        X = X.drop(['SK_ID_CURR','TARGET'], axis=1)
+        risk = model.predict_proba(X)[:, 1][0]
+        #tauxRisk = risk
+        if risk > seuil:
+            status = "Refusé"
+        else:
+            status = "Accordée"
+        return {"client_id": client_id, "risk": risk, "status": status}
