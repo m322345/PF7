@@ -153,42 +153,42 @@ def main():
                     DetailClient = Client(pred['client_id'],ClientsDatabase)
                     col1, col2 = st.columns(2)
                     with col1:
-                        st.write(f'Genre: {baliseDeb}{DetailClient['CODE_GENDER'].values[0]}{baliseFin}', unsafe_allow_html=True)
-                        st.write(f'Age: {baliseDeb}{round(abs(DetailClient['DAYS_BIRTH'].values[0]/365))}{baliseFin}', unsafe_allow_html=True)
-                        st.write(f'Status: {baliseDeb}{SearchRightCol(DetailClient,'NAME_FAMILY_STATUS')}{baliseFin}', unsafe_allow_html=True)
-                        st.write(f'Education: {baliseDeb}{SearchRightCol(DetailClient,'NAME_EDUCATION_TYPE')}{baliseFin}', unsafe_allow_html=True)
-                        st.write(f'Occupation: {baliseDeb}{SearchRightCol(DetailClient,'OCCUPATION_TYPE')}{baliseFin}', unsafe_allow_html=True)
+                        st.write(f"Genre: {baliseDeb}{DetailClient['CODE_GENDER'].values[0]}{baliseFin}", unsafe_allow_html=True)
+                        st.write(f"Age: {baliseDeb}{round(abs(DetailClient['DAYS_BIRTH'].values[0]/365))}{baliseFin}", unsafe_allow_html=True)
+                        st.write(f"Status: {baliseDeb}{SearchRightCol(DetailClient,'NAME_FAMILY_STATUS')}{baliseFin}", unsafe_allow_html=True)
+                        st.write(f"Education: {baliseDeb}{SearchRightCol(DetailClient,'NAME_EDUCATION_TYPE')}{baliseFin}", unsafe_allow_html=True)
+                        st.write(f"Occupation: {baliseDeb}{SearchRightCol(DetailClient,'OCCUPATION_TYPE')}{baliseFin}", unsafe_allow_html=True)
                         if np.isnan(DetailClient['DAYS_EMPLOYED'].values[0]):
-                            st.write(f'Profession: {baliseDeb}inconnue{baliseFin}', unsafe_allow_html=True)
+                            st.write(f"Profession: {baliseDeb}inconnue{baliseFin}", unsafe_allow_html=True)
                         else:
-                            st.write(f'Profession: {baliseDeb}{SearchRightCol(DetailClient,'ORGANIZATION_TYPE')}{baliseFin}', unsafe_allow_html=True)
-                            st.write(f'depuis {baliseDeb}{round(abs(DetailClient['DAYS_EMPLOYED'].values[0]/365))}{baliseFin} années', unsafe_allow_html=True)
-                        st.write(f'Type d\'habitation: {baliseDeb}{SearchRightCol(DetailClient,'NAME_HOUSING_TYPE')}{baliseFin}', unsafe_allow_html=True)
-                        st.write(f'Voiture : {baliseDeb}{DetailClient['FLAG_OWN_CAR'].values[0]}{baliseFin}', unsafe_allow_html=True)
+                            st.write(f"Profession: {baliseDeb}{SearchRightCol(DetailClient,'ORGANIZATION_TYPE')}{baliseFin}", unsafe_allow_html=True)
+                            st.write(f"depuis {baliseDeb}{round(abs(DetailClient['DAYS_EMPLOYED'].values[0]/365))}{baliseFin} années", unsafe_allow_html=True)
+                        st.write(f"Type d\'habitation: {baliseDeb}{SearchRightCol(DetailClient,'NAME_HOUSING_TYPE')}{baliseFin}", unsafe_allow_html=True)
+                        st.write(f"Voiture : {baliseDeb}{DetailClient['FLAG_OWN_CAR'].values[0]}{baliseFin}", unsafe_allow_html=True)
                     with col2:
-                        st.write(f'Patrimoine total : {baliseDeb}{DetailClient.AMT_INCOME_TOTAL.values[0]}{baliseFin} $', unsafe_allow_html=True)
-                        st.write(f'Type(s) de contrat(s) obtenus:', unsafe_allow_html=True)
-                        st.write(f'{baliseDeb}{SearchRightCol(DetailClient,'NAME_CONTRACT_TYPE').replace('PREV','  \n').replace('MEAN','')}{baliseFin}', unsafe_allow_html=True)
-                        st.write(f'Montant: {baliseDeb}{DetailClient['AMT_CREDIT'].values[0]}{baliseFin} $', unsafe_allow_html=True)
-                        st.write(f'Montant annuel: {baliseDeb}{DetailClient['AMT_ANNUITY'].values[0]}{baliseFin} $', unsafe_allow_html=True)
-                        st.write(f'Ratio credit sur revenus: {baliseDeb}{round(DetailClient['ANNUITY_INCOME_PERC'].values[0],2)}{baliseFin}', unsafe_allow_html=True)
+                        st.write(f"Patrimoine total : {baliseDeb}{DetailClient.AMT_INCOME_TOTAL.values[0]}{baliseFin} $", unsafe_allow_html=True)
+                        st.write(f"Type(s) de contrat(s) obtenus:", unsafe_allow_html=True)
+                        st.write(f"{baliseDeb}{SearchRightCol(DetailClient,'NAME_CONTRACT_TYPE').replace('PREV','  \n').replace('MEAN','')}{baliseFin}", unsafe_allow_html=True)
+                        st.write(f"Montant: {baliseDeb}{DetailClient['AMT_CREDIT'].values[0]}{baliseFin} $", unsafe_allow_html=True)
+                        st.write(f"Montant annuel: {baliseDeb}{DetailClient['AMT_ANNUITY'].values[0]}{baliseFin} $", unsafe_allow_html=True)
+                        st.write(f"Ratio credit sur revenus: {baliseDeb}{round(DetailClient['ANNUITY_INCOME_PERC'].values[0],2)}{baliseFin}", unsafe_allow_html=True)
 
                 with st.spinner("Merci de patienter, nous préparons les données du client ... "):
                     st.subheader("Résultat de la demande de crédit", divider="blue")
-                    st.write(f'<center><h4>La demande de crédit est ',
-                            f'{definitionCreditCol(pred['risk'],Seuil,'baliseDeb')}{pred['status']}{baliseFin}',
-                            f'</h4></center>', unsafe_allow_html=True)
-                    st.write('  \n  \n')
+                    st.write(f"<center><h4>La demande de crédit est ",
+                            f"{definitionCreditCol(pred['risk'],Seuil,'baliseDeb')}{pred['status']}{baliseFin}",
+                            f"</h4></center>", unsafe_allow_html=True)
+                    st.write("  \n  \n")
 
                 with st.spinner("Merci de patienter, nous préparons les données du client ... "):
                     st.subheader("Risque de défaut de remboursement", divider="blue")
-                    st.write(f'<center><i>Le risque de défaut de remboursement est de ',
-                             f'{definitionCreditCol(pred['risk'],Seuil,'baliseDeb')}{pred['risk']:.3f}{baliseFin}',
-                             f'Le seuil de refus est fixé à ',
-                             f'{baliseDeb}{Seuil:.3f}{baliseFin}</i></center>', unsafe_allow_html=True)
-                    st.write(f'<center>Le risque est par consequent ',
-                            f'{definitionCreditCol(pred['risk'],Seuil,'texteJaug')} de ',
-                            f'{definitionCreditCol(pred['risk'],Seuil,'points')} points du seuil maximal fixé</center>', unsafe_allow_html=True)
+                    st.write(f"<center><i>Le risque de défaut de remboursement est de ",
+                             f"{definitionCreditCol(pred['risk'],Seuil,'baliseDeb')}{pred['risk']:.3f}{baliseFin}",
+                             f"Le seuil de refus est fixé à ",
+                             f"{baliseDeb}{Seuil:.3f}{baliseFin}</i></center>", unsafe_allow_html=True)
+                    st.write(f"<center>Le risque est par consequent ",
+                            f"{definitionCreditCol(pred['risk'],Seuil,'texteJaug')} de ",
+                            f"{definitionCreditCol(pred['risk'],Seuil,'points')} points du seuil maximal fixé</center>", unsafe_allow_html=True)
                     jauge = go.Figure(go.Indicator(
                             domain = {'x': [0, 1], 'y': [0, 1]},
                             value = round(pred['risk'],3),
@@ -209,7 +209,7 @@ def main():
                                             ['AMT_CREDIT','AMT_ANNUITY']
                                             )
                     if len(options) == 0:
-                        st.write(f'Choisissez au moins une variable dans le menu déroulant ci-dessus')
+                        st.write(f"Choisissez au moins une variable dans le menu déroulant ci-dessus")
                     else:
                         
                         dfGraph = pd.DataFrame()
@@ -232,17 +232,17 @@ def main():
                         #st.pyplot(fig)
 
                 with st.spinner("Merci de patienter, nous calculons l'explication locale ... "):
-#                    model = loadModel(pathMod+'model.pkl')
-#                    shap_values_single, shap_values = visualize_importance(model, user_id, ClientsDatabase)
+                    model = loadModel(pathMod+'model.pkl')
+                    shap_values_single, shap_values = visualize_importance(model, user_id, ClientsDatabase)
                     st.subheader("Explication Locale", divider="blue")
                     fig, ax = plt.subplots(figsize=(5, 5))
-#                    shap.plots.waterfall(shap_values_single[0], max_display=10)
+                    shap.plots.waterfall(shap_values_single[0], max_display=10)
                     st.pyplot(fig)
 
                 with st.spinner("Merci de patienter, nous calculons l'explication globale ... "):
                     st.subheader("Explication Globale", divider="blue")
                     fig, ax = plt.subplots(figsize=(5, 5))
-#                    shap.summary_plot(shap_values, max_display=10)
+                    shap.summary_plot(shap_values, max_display=10)
                     st.pyplot(fig)
     else:
         st.write('')
