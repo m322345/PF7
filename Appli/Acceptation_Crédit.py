@@ -229,10 +229,13 @@ def main():
 
                 with st.spinner("Merci de patienter, nous calculons l'explication locale ... "):
                     st.subheader("Explication variable", divider="blue")
+                    listeVars = GetItems(ClientsDatabase)
+                    listeVars.insert(0, 'Cliquez ici pour choisir')
+                    var2Analys = st.sidebar.selectbox('Variable a analyser :',listeVars, index=0)
                     model = loadModel(pathMod+'model.pkl')
                     shap_values_single, shap_values, explainer = visualize_importance(model, user_id, ClientsDatabase)
                     fig, ax = plt.subplots(figsize=(5, 5))
-                    shap.plots.scatter(shap_values[:, "EXT_SOURCE_1"])
+                    shap.plots.scatter(shap_values[:, var2Analys])
                     st.pyplot(fig)
 
 
