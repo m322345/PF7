@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 import requests
 import numpy as np
 from PIL import Image
-#import shap
-#import lightgbm
+import shap
+import lightgbm
 from pathlib import Path
 import pickle
 
