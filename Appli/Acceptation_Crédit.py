@@ -137,7 +137,7 @@ def main():
     st.markdown(f"<h2 style='{style_heading}'>Acceptation Crédit Prêt à Dépenser</h2>", unsafe_allow_html=True)
 
     if st.session_state.etat != 0 and user_id != 'Cliquez ici pour choisir':
-        with st.spinner("Merci de patienter, nous calculons les risques client ... "):
+        with st.spinner("Merci de patienter, nous reveillons l'Api ... "):
             pred = request_prediction(MODEL_URI, str(user_id))
         if type(pred) == dict:
 
