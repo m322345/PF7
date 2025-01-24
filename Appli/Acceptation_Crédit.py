@@ -214,6 +214,7 @@ def main():
                         dfGraph.rename(index={id_user:'client'}, inplace=True)
                         dfGraph=dfGraph.T
                         dfGraph['amplitude']=dfGraph['max']-dfGraph['min']
+                        dfGraph['all_prc']=1
                         dfGraph['mid_prc']=(dfGraph['mean']-dfGraph['min'])/dfGraph['amplitude']
                         dfGraph['client_prc']=(dfGraph['client']-dfGraph['min'])/dfGraph['amplitude']
                         st.write(dfGraph)
