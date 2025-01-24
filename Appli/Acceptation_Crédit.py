@@ -141,8 +141,8 @@ def main():
                 st.write(f"Erreur {pred['error']}")
             else:
 
+                st.subheader(f"Données client {pred['client_id']}", divider="blue")
                 with st.spinner("Merci de patienter, nous recherchons les données du client ... "):
-                    st.subheader(f"Données client {pred['client_id']}", divider="blue")
                     style_center = 'text-align: center'
                     style_rubrique = 'text-align: left'#; text-decoration: underline'
                     DetailClient = Client(pred['client_id'],ClientsDatabase)
@@ -169,15 +169,15 @@ def main():
                         st.write(f"Montant annuel: {baliseDeb}{DetailClient['AMT_ANNUITY'].values[0]}{baliseFin} $", unsafe_allow_html=True)
                         st.write(f"Ratio credit sur revenus: {baliseDeb}{round(DetailClient['ANNUITY_INCOME_PERC'].values[0],2)}{baliseFin}", unsafe_allow_html=True)
 
+                st.subheader("Résultat de la demande de crédit", divider="blue")
                 with st.spinner("Merci de patienter, nous préparons les données du client ... "):
-                    st.subheader("Résultat de la demande de crédit", divider="blue")
                     st.write(f"<center><h4>La demande de crédit est ",
                             f"{definitionCreditCol(pred['risk'],Seuil,'baliseDeb')}{pred['status']}{baliseFin}",
                             f"</h4></center>", unsafe_allow_html=True)
                     st.write("  \n  \n")
 
+                st.subheader("Risque de défaut de remboursement", divider="blue")
                 with st.spinner("Merci de patienter, nous préparons les données du client ... "):
-                    st.subheader("Risque de défaut de remboursement", divider="blue")
                     st.write(f"<center><i>Le risque de défaut de remboursement est de ",
                              f"{definitionCreditCol(pred['risk'],Seuil,'baliseDeb')}{pred['risk']:.3f}{baliseFin}",
                              f"Le seuil de refus est fixé à ",
@@ -198,8 +198,8 @@ def main():
                                  'threshold' : {'line': {'color': "white", 'width': 2}, 'thickness': 0.9, 'value': Seuil}}))
                     st.plotly_chart(jauge, use_container_width=True, theme="streamlit", on_select="ignore")
 
+                st.subheader("Comparaison d\'un client", divider="blue")
                 with st.spinner("Merci de patienter, nous recherchons les données du client ... "):
-                    st.subheader("Comparaison d\'un client", divider="blue")
                     options = st.multiselect("Choisissez des variables pour les comparer au groupe",
                                             GetItems(ClientsDatabase),
                                             ['AMT_CREDIT','AMT_ANNUITY']
@@ -226,31 +226,31 @@ def main():
                         #fig, ax = plt.subplots(figsize=(5, 5))
                         #st.pyplot(fig)
 
+                st.subheader("Explication variable", divider="blue")
                 with st.spinner("Merci de patienter, nous calculons l'explication locale ... "):
-                    st.subheader("Explication variable", divider="blue")
                     listeVars = GetItems(ClientsDatabase)
                     listeVars.insert(0, 'Cliquez ici pour choisir')
                     var2Analys = st.selectbox('Variable a analyser :',listeVars, index=0)
                     model = loadModel(pathMod+'model.pkl')
                     shap_values_single, shap_values, explainer = visualize_importance(model, user_id, ClientsDatabase)
-                    if len(var2Analys) == 0:
+                    if var2Analys == 'Cliquez ici pour choisir':
                         st.write(f"Choisissez une variable dans le menu déroulant ci-dessus")
                     else:
                         fig, ax = plt.subplots(figsize=(5, 5))
-                        shap.plots.scatter(shap_values[:, 'CODE_GENDER'])
+                        shap.plots.scatter(shap_values[:, var2Analys])
                         st.pyplot(fig)
 
 
+                st.subheader("Explication Locale", divider="blue")
                 with st.spinner("Merci de patienter, nous calculons l'explication locale ... "):
 #                    model = loadModel(pathMod+'model.pkl')
 #                    shap_values_single, shap_values, explainer = visualize_importance(model, user_id, ClientsDatabase)
-                    st.subheader("Explication Locale", divider="blue")
                     fig, ax = plt.subplots(figsize=(5, 5))
                     shap.plots.waterfall(shap_values_single[0], max_display=10)
                     st.pyplot(fig)
 
+                st.subheader("Explication Globale", divider="blue")
                 with st.spinner("Merci de patienter, nous calculons l'explication globale ... "):
-                    st.subheader("Explication Globale", divider="blue")
                     fig, ax = plt.subplots(figsize=(5, 5))
                     shap.summary_plot(shap_values, max_display=10)
                     st.pyplot(fig)
