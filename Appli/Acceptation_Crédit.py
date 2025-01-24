@@ -217,12 +217,25 @@ def main():
                         dfGraph['mid_prc']=(dfGraph['mean']-dfGraph['min'])/dfGraph['amplitude']
                         dfGraph['client_prc']=(dfGraph['client']-dfGraph['min'])/dfGraph['amplitude']
                         st.write(dfGraph)
-                        dataGraph = go.Figure(go.Bar(
-                            y=dfGraph.index,
-                            x=dfGraph['client_prc','mid_prc'],
-                            marker_color='red'
-                        ))
-                        st.plotly_chart(dataGraph, use_container_width=False, theme="streamlit", on_select="ignore")
+                        fig = go.Figure(go.Bar(x=dfGraph.index,
+                                                     y=dfGraph['all_prc'],
+                                                     marker_color=CouleurAccord,
+                                                     name="100% des clients"
+                                                     ))
+                        fig.add_scatter(x=dfGraph.index,
+                                        y=dfGraph['mid_prc'], mode="markers",
+                                        marker_symbol="line-ew",
+                                        marker_color="white",
+                                        marker_line_color="white",
+                                        marker_line_width=2, marker_size=50,
+                                        hovertemplate="test",
+                                        #marker=dict(size=40, symbol="line-ew", color="red"),
+                                        name="50% des clients")
+                        fig.add_scatter(x=dfGraph.index,
+                                        y=dfGraph['client_prc'], mode="markers",
+                                        marker=dict(size=30, color="#464646"),
+                                        name="Client")
+                        st.plotly_chart(fig, use_container_width=False, theme="streamlit", on_select="ignore")
                         #fig = go.Figure()
                         #fig.add_trace(data)
                         #fig.show()
