@@ -217,7 +217,7 @@ def main():
                         dfGraph['all_prc']=1
                         dfGraph['mid_prc']=(dfGraph['mean']-dfGraph['min'])/dfGraph['amplitude']
                         dfGraph['client_prc']=(dfGraph['client']-dfGraph['min'])/dfGraph['amplitude']
-                        st.write(dfGraph)
+                        #st.write(dfGraph)
                         fig = go.Figure(go.Bar(x=dfGraph.index,
                                                      y=dfGraph['all_prc'],
                                                      marker_color=CouleurAccord,
