@@ -147,7 +147,7 @@ def main():
             else:
 
                 with st.spinner("Merci de patienter, nous recherchons les données du client ... "):
-                    st.subheader(f'Données client {pred['client_id']}', divider=True)
+                    st.subheader(f"Données client {pred['client_id']}", divider="blue")
                     style_center = 'text-align: center'
                     style_rubrique = 'text-align: left'#; text-decoration: underline'
                     DetailClient = Client(pred['client_id'],ClientsDatabase)
