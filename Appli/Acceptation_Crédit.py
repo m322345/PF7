@@ -223,6 +223,7 @@ def main():
                                                      marker_color=CouleurAccord,
                                                      name="100% des clients"
                                                      ))
+                        marker_size = 300 / len(options)
                         fig.add_scatter(x=dfGraph.index,
                                         y=dfGraph['mid_prc'], mode="markers",
                                         marker_symbol="line-ew",
@@ -232,9 +233,10 @@ def main():
                                         hovertemplate="test",
                                         #marker=dict(size=40, symbol="line-ew", color="red"),
                                         name="50% des clients")
+                        marker_size = marker_size / 2
                         fig.add_scatter(x=dfGraph.index,
                                         y=dfGraph['client_prc'], mode="markers",
-                                        marker=dict(size=30, color="#464646"),
+                                        marker=dict(size=marker_size, color="#464646"),
                                         name="Client")
                         st.plotly_chart(fig, use_container_width=False, theme="streamlit", on_select="ignore")
                         #fig = go.Figure()
