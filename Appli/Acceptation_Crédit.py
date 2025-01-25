@@ -217,9 +217,7 @@ def main():
                         dfGraph=dfGraph.T
                         dfGraph['amplitude']=dfGraph['max']-dfGraph['min']
                         dfGraph['100_prc']=1
-                        dfGraph['25_prc']=(dfGraph.quantile(q=0.25, axis=1)-dfGraph['min'])/dfGraph['amplitude']
                         dfGraph['50_prc']=(dfGraph['mean']-dfGraph['min'])/dfGraph['amplitude']
-                        dfGraph['75_prc']=(dfGraph.quantile(q=0.75, axis=1)-dfGraph['min'])/dfGraph['amplitude']
                         dfGraph['client_prc']=(dfGraph['client']-dfGraph['min'])/dfGraph['amplitude']
                         fig = go.Figure(go.Bar(x=dfGraph.index,
                                                      y=dfGraph['100_prc'],
@@ -229,29 +227,13 @@ def main():
                                                      ))
                         marker_size = 300 / nb_options
                         fig.add_scatter(x=dfGraph.index,
-                                        y=dfGraph['75_prc'], mode="markers",
-                                        marker_symbol="line-ew",
-                                        marker_color="#464646",
-                                        marker_line_color="#464646",
-                                        marker_line_width=2, marker_size=marker_size,
-                                        hovertemplate="75% des clients<br>Valeur: %{y:.3f}<extra></extra>",
-                                        name="75% des clients")
-                        fig.add_scatter(x=dfGraph.index,
                                         y=dfGraph['50_prc'], mode="markers",
-                                        marker_symbol="line-ew",
-                                        marker_color=CouleurRefus,
-                                        marker_line_color=CouleurRefus,
-                                        marker_line_width=2, marker_size=marker_size,
-                                        hovertemplate="50% des clients<br>Valeur: %{y:.3f}<extra></extra>",
-                                        name="50% des clients")
-                        fig.add_scatter(x=dfGraph.index,
-                                        y=dfGraph['25_prc'], mode="markers",
                                         marker_symbol="line-ew",
                                         marker_color="white",
                                         marker_line_color="white",
                                         marker_line_width=2, marker_size=marker_size,
-                                        hovertemplate="25% des clients<br>Valeur: %{y:.3f}<extra></extra>",
-                                        name="25% des clients")
+                                        hovertemplate="50% des clients<br>Valeur: %{y:.3f}<extra></extra>",
+                                        name="50% des clients")
                         marker_size = marker_size / 2
                         name = f"Client {id_client}"
                         fig.add_scatter(x=dfGraph.index,
@@ -260,13 +242,7 @@ def main():
                                         marker=dict(size=marker_size, color="#464646"),
                                         hovertemplate="Client %{text}<br>Valeur: %{y:.3f}<extra></extra>",
                                         name=name)
-                        #fig.update_yaxes(showspikes=True, spikecolor=CouleurAccord, spikesnap="cursor", spikemode="across")
                         st.plotly_chart(fig, use_container_width=False, theme="streamlit", on_select="ignore")
-                        #fig = go.Figure()
-                        #fig.add_trace(data)
-                        #fig.show()
-                        #fig, ax = plt.subplots(figsize=(5, 5))
-                        #st.pyplot(fig)
 
 
                 with st.spinner("Merci de patienter, nous calculons l'importance des variables ... "):
