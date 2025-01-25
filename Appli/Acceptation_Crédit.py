@@ -141,6 +141,7 @@ def main():
                 st.write(f"Erreur {pred['error']}")
             else:
                 listeVars = GetItems(DropColumns(ClientsDatabase))
+                id_client = pred['client_id']
                 st.subheader(f"Données client {pred['client_id']}", divider="blue")
                 with st.spinner("Merci de patienter, nous recherchons les données du client ... "):
                     style_center = 'text-align: center'
@@ -239,8 +240,8 @@ def main():
                         fig.add_scatter(x=dfGraph.index,
                                         y=dfGraph['client_prc'], mode="markers",
                                         marker=dict(size=marker_size, color="#464646"),
-                                        hovertemplate="Client %{user_id}<br>Valeur: %{y:.3f}<extra></extra>",
-                                        name="Client %{user_id}")
+                                        hovertemplate="Client "+id_client+"<br>Valeur: %{y:.3f}<extra></extra>",
+                                        name="Client "+id_client)
                         st.plotly_chart(fig, use_container_width=False, theme="streamlit", on_select="ignore")
                         #fig = go.Figure()
                         #fig.add_trace(data)
