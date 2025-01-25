@@ -239,11 +239,11 @@ def main():
                         marker_size = marker_size / 2
                         fig.add_scatter(x=dfGraph.index,
                                         y=dfGraph['client_prc'], mode="markers",
+                                        text = id_client,
                                         marker=dict(size=marker_size, color="#464646"),
                                         hovertemplate="Client %{text}<br>Valeur: %{y:.3f}<extra></extra>",
-                                        text = id_client,
                                         name="Client %{text}")
-                        fig.update_yaxes(showspikes=True, spikecolor=CouleurAccord, spikesnap="cursor", spikemode="across")
+                        #fig.update_yaxes(showspikes=True, spikecolor=CouleurAccord, spikesnap="cursor", spikemode="across")
                         st.plotly_chart(fig, use_container_width=False, theme="streamlit", on_select="ignore")
                         #fig = go.Figure()
                         #fig.add_trace(data)
