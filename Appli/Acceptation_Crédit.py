@@ -140,7 +140,7 @@ def main():
                 st.write(f"")
                 st.write(f"Erreur {pred['error']}")
             else:
-
+                listeVars = GetItems(DropColumns(ClientsDatabase))
                 st.subheader(f"Données client {pred['client_id']}", divider="blue")
                 with st.spinner("Merci de patienter, nous recherchons les données du client ... "):
                     style_center = 'text-align: center'
@@ -201,7 +201,7 @@ def main():
                 st.subheader("Comparaison d\'un client", divider="blue")
                 with st.spinner("Merci de patienter, nous recherchons les données du client ... "):
                     options = st.multiselect("Choisissez des variables pour les comparer au groupe",
-                                            GetItems(ClientsDatabase),
+                                            listeVars,
                                             ['AMT_CREDIT','AMT_ANNUITY']
                                             )
                     if len(options) == 0:
@@ -256,7 +256,6 @@ def main():
 
                 st.subheader("Explication variable", divider="blue")
                 with st.spinner("Merci de patienter, nous calculons l'explication des variables ... "):
-                    listeVars = GetItems(ClientsDatabase)
                     #listeVars = listeVars.remove("SK_ID_CURR")
                     #listeVars = listeVars.remove("TARGET")
                     listeVars.insert(0, 'Cliquez ici pour choisir')
