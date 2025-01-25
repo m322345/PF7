@@ -240,8 +240,9 @@ def main():
                         fig.add_scatter(x=dfGraph.index,
                                         y=dfGraph['client_prc'], mode="markers",
                                         marker=dict(size=marker_size, color="#464646"),
-                                        hovertemplate=f"Client {id_client}<br>Valeur: {y:.3f}<extra></extra>",
-                                        name=f"Client {id_client}")
+                                        hovertemplate="Client %{id_c}<br>Valeur: %{y:.3f}<extra></extra>",
+                                        id_c = [id_client],
+                                        name="Client %{id_c}")
                         st.plotly_chart(fig, use_container_width=False, theme="streamlit", on_select="ignore")
                         #fig = go.Figure()
                         #fig.add_trace(data)
