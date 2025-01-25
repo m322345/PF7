@@ -230,7 +230,7 @@ def main():
                                         marker_symbol="line-ew",
                                         marker_color="white",
                                         marker_line_color="white",
-                                        marker_line_width=2, marker_size=50,
+                                        marker_line_width=2, marker_size=marker_size,
                                         hovertemplate="test",
                                         #marker=dict(size=40, symbol="line-ew", color="red"),
                                         name="50% des clients")
