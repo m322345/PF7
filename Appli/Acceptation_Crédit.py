@@ -207,6 +207,7 @@ def main():
                     if len(options) == 0:
                         st.write(f"Choisissez au moins une variable dans le menu déroulant ci-dessus")
                     else:
+                        nb_options = len(options)
                         dfGraph = pd.DataFrame()
                         id_user = ClientsDatabase.loc[ClientsDatabase.SK_ID_CURR == pred['client_id']].index[0]
                         dfGraph = ClientsDatabase[options].agg(['min', 'mean', 'max'])
@@ -223,7 +224,7 @@ def main():
                                                      marker_color=CouleurAccord,
                                                      name="100% des clients"
                                                      ))
-                        marker_size = 300 / len(options)
+                        marker_size = 300 / nb_options
                         fig.add_scatter(x=dfGraph.index,
                                         y=dfGraph['mid_prc'], mode="markers",
                                         marker_symbol="line-ew",
