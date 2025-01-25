@@ -216,26 +216,46 @@ def main():
                         dfGraph.rename(index={id_user:'client'}, inplace=True)
                         dfGraph=dfGraph.T
                         dfGraph['amplitude']=dfGraph['max']-dfGraph['min']
-                        dfGraph['all_prc']=1
-                        dfGraph['mid_prc']=(dfGraph['mean']-dfGraph['min'])/dfGraph['amplitude']
+                        dfGraph['100_prc']=1
+                        dfGraph['25_prc']=(dfGraph.quantile(q=0.25, axis=1)-dfGraph['min'])/dfGraph['amplitude']
+                        dfGraph['50_prc']=(dfGraph['mean']-dfGraph['min'])/dfGraph['amplitude']
+                        dfGraph['75_prc']=(dfGraph.quantile(q=0.75, axis=1)-dfGraph['min'])/dfGraph['amplitude']
                         dfGraph['client_prc']=(dfGraph['client']-dfGraph['min'])/dfGraph['amplitude']
                         #st.write(dfGraph)
                         fig = go.Figure(go.Bar(x=dfGraph.index,
-                                                     y=dfGraph['all_prc'],
+                                                     y=dfGraph['100_prc'],
                                                      marker_color=CouleurAccord,
                                                      hovertemplate="100% des clients<extra></extra>",
                                                      name="100% des clients"
                                                      ))
                         marker_size = 300 / nb_options
                         fig.add_scatter(x=dfGraph.index,
-                                        y=dfGraph['mid_prc'], mode="markers",
+                                        y=dfGraph['25_prc'], mode="markers",
                                         marker_symbol="line-ew",
-                                        marker_color="white",
-                                        marker_line_color="white",
+                                        marker_color="black",
+                                        marker_line_color="black",
+                                        marker_line_width=2, marker_size=marker_size,
+                                        hovertemplate="25% des clients<br>Valeur: %{y:.3f}<extra></extra>",
+                                        #marker=dict(size=40, symbol="line-ew", color="red"),
+                                        name="50% des clients")
+                        fig.add_scatter(x=dfGraph.index,
+                                        y=dfGraph['50_prc'], mode="markers",
+                                        marker_symbol="line-ew",
+                                        marker_color="#C0C0C0",
+                                        marker_line_color="#C0C0C0",
                                         marker_line_width=2, marker_size=marker_size,
                                         hovertemplate="50% des clients<br>Valeur: %{y:.3f}<extra></extra>",
                                         #marker=dict(size=40, symbol="line-ew", color="red"),
                                         name="50% des clients")
+                        fig.add_scatter(x=dfGraph.index,
+                                        y=dfGraph['75_prc'], mode="markers",
+                                        marker_symbol="line-ew",
+                                        marker_color="white",
+                                        marker_line_color="white",
+                                        marker_line_width=2, marker_size=marker_size,
+                                        hovertemplate="75% des clients<br>Valeur: %{y:.3f}<extra></extra>",
+                                        #marker=dict(size=40, symbol="line-ew", color="red"),
+                                        name="75% des clients")
                         marker_size = marker_size / 2
                         name = f"Client {id_client}"
                         fig.add_scatter(x=dfGraph.index,
