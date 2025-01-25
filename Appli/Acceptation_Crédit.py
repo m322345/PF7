@@ -239,7 +239,7 @@ def main():
                         marker_size = marker_size / 2
                         fig.add_scatter(x=dfGraph.index,
                                         y=dfGraph['client_prc'], mode="markers",
-                                        text=str(id_client),
+                                        text=[f"{id_client}" for i in range(nb_options)],
                                         marker=dict(size=marker_size, color="#464646"),
                                         hovertemplate="Client %{text}<br>Valeur: %{y:.3f}<extra></extra>",
                                         name="Client %{text}")
