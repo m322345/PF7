@@ -229,13 +229,13 @@ def main():
                                                      ))
                         marker_size = 300 / nb_options
                         fig.add_scatter(x=dfGraph.index,
-                                        y=dfGraph['25_prc'], mode="markers",
+                                        y=dfGraph['75_prc'], mode="markers",
                                         marker_symbol="line-ew",
-                                        marker_color="white",
-                                        marker_line_color="white",
+                                        marker_color="#464646",
+                                        marker_line_color="#464646",
                                         marker_line_width=2, marker_size=marker_size,
-                                        hovertemplate="25% des clients<br>Valeur: %{y:.3f}<extra></extra>",
-                                        name="25% des clients")
+                                        hovertemplate="75% des clients<br>Valeur: %{y:.3f}<extra></extra>",
+                                        name="75% des clients")
                         fig.add_scatter(x=dfGraph.index,
                                         y=dfGraph['50_prc'], mode="markers",
                                         marker_symbol="line-ew",
@@ -245,13 +245,13 @@ def main():
                                         hovertemplate="50% des clients<br>Valeur: %{y:.3f}<extra></extra>",
                                         name="50% des clients")
                         fig.add_scatter(x=dfGraph.index,
-                                        y=dfGraph['75_prc'], mode="markers",
+                                        y=dfGraph['25_prc'], mode="markers",
                                         marker_symbol="line-ew",
-                                        marker_color="#464646",
-                                        marker_line_color="#464646",
+                                        marker_color="white",
+                                        marker_line_color="white",
                                         marker_line_width=2, marker_size=marker_size,
-                                        hovertemplate="75% des clients<br>Valeur: %{y:.3f}<extra></extra>",
-                                        name="75% des clients")
+                                        hovertemplate="25% des clients<br>Valeur: %{y:.3f}<extra></extra>",
+                                        name="25% des clients")
                         marker_size = marker_size / 2
                         name = f"Client {id_client}"
                         fig.add_scatter(x=dfGraph.index,
