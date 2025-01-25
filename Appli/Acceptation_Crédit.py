@@ -222,6 +222,7 @@ def main():
                         fig = go.Figure(go.Bar(x=dfGraph.index,
                                                      y=dfGraph['all_prc'],
                                                      marker_color=CouleurAccord,
+                                                     hovertemplate="100% des clients<extra></extra>",
                                                      name="100% des clients"
                                                      ))
                         marker_size = 300 / nb_options
@@ -231,13 +232,14 @@ def main():
                                         marker_color="white",
                                         marker_line_color="white",
                                         marker_line_width=2, marker_size=marker_size,
-                                        hovertemplate="test",
+                                        hovertemplate="50% des clients<br>Valeur: %{round(y,3)}<extra></extra>",
                                         #marker=dict(size=40, symbol="line-ew", color="red"),
                                         name="50% des clients")
                         marker_size = marker_size / 2
                         fig.add_scatter(x=dfGraph.index,
                                         y=dfGraph['client_prc'], mode="markers",
                                         marker=dict(size=marker_size, color="#464646"),
+                                        hovertemplate="Client<br>Valeur: %{round(y,3)}<extra></extra>",
                                         name="Client")
                         st.plotly_chart(fig, use_container_width=False, theme="streamlit", on_select="ignore")
                         #fig = go.Figure()
