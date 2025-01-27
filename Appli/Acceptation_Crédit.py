@@ -254,14 +254,33 @@ def main():
                 with st.spinner("Merci de patienter, nous calculons l'explication des variables ... "):
                     #listeVars = listeVars.remove("SK_ID_CURR")
                     #listeVars = listeVars.remove("TARGET")
-                    listeVars.insert(0, 'Cliquez ici pour choisir')
-                    var2Analys = st.selectbox('Variable a analyser :',listeVars, index=0)
-                    if var2Analys == 'Cliquez ici pour choisir':
-                        st.write(f"Choisissez une variable dans le menu déroulant ci-dessus")
+                    listeVars1 = listeVars
+                    listeVars1.insert(0, 'Cliquez ici pour choisir')
+                    var2Analys1 = st.selectbox('Première variable a analyser :',listeVars1, index=0)
+                    if var2Analys1 == 'Cliquez ici pour choisir':
+                        st.write(f"Choisissez une première variable dans le menu déroulant ci-dessus")
                     else:
-                        fig, ax = plt.subplots(figsize=(5, 5))
-                        shap.plots.scatter(shap_values[:, var2Analys])
-                        st.pyplot(fig)
+                        listeVars2 =listeVars1
+                        listeVars2.remove(var2Analys1)
+                        var2Analys2 = st.selectbox('Deuxième variable a analyser :',listeVars2, index=0)
+                        if var2Analys2 == 'Cliquez ici pour choisir':
+                            st.write(f"Choisissez une deuxième variable dans le menu déroulant ci-dessus")
+                        else:
+                            pipeline = model['pipeline']
+                            ClientsDatabaseDroped = DropColumns(ClientsDatabase)
+                            ClientsDatabaseTransf = pipeline.transform(DropColumns(ClientsDatabaseDroped))
+                            varX = ClientsDatabaseTransf[listeVars.index(var2Analys1)]
+                            varY = ClientsDatabaseTransf[listeVars.index(var2Analys2)]
+                            fig = go.Figure(go.Scatter(x=varX,
+                                            y=varY, mode="markers",
+                                            marker_symbol="circle",
+                                            marker_color="#464646",
+                                            marker_line_color="#464646",
+                                            marker_line_width=2, marker_size=2,
+                                            #hovertemplate="test",
+                                            #marker=dict(size=40, symbol="line-ew", color="red"),
+                                            name="50% des clients"))
+                            st.plotly_chart(fig, use_container_width=False, theme="streamlit", on_select="ignore")
 
 
                 st.subheader("Explication Locale", divider="blue")
