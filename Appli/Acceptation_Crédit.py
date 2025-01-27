@@ -254,13 +254,13 @@ def main():
                 with st.spinner("Merci de patienter, nous calculons l'explication des variables ... "):
                     #listeVars = listeVars.remove("SK_ID_CURR")
                     #listeVars = listeVars.remove("TARGET")
-                    listeVars1 = listeVars
+                    listeVars1 = listeVars.copy()
                     listeVars1.insert(0, 'Cliquez ici pour choisir')
                     var2Analys1 = st.selectbox('Première variable a analyser :',listeVars1, index=0)
                     if var2Analys1 == 'Cliquez ici pour choisir':
                         st.write(f"Choisissez une première variable dans le menu déroulant ci-dessus")
                     else:
-                        listeVars2 =listeVars1
+                        listeVars2 = listeVars1.copy()
                         listeVars2.remove(var2Analys1)
                         var2Analys2 = st.selectbox('Deuxième variable a analyser :',listeVars2, index=0)
                         if var2Analys2 == 'Cliquez ici pour choisir':
