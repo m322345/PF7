@@ -114,13 +114,10 @@ def main():
     #Url Api
     MODEL_URI = 'https://ocp7-api.onrender.com/'
     #fichier données
-    #Logo =  Image.open(pathImg+"logo.png") 
     #creation de la session
     if 'etat' not in st.session_state:
         st.session_state.etat = 0
     #Menu
-    #st.sidebar.image(Logo, width= 220)
-    #st.sidebar.markdown(" Page d'accueil du dashboard")*
     listeMenu = ClientsList
     listeMenu.insert(0, 'Cliquez ici pour choisir')
     user_id = st.sidebar.selectbox('Dossier client :',listeMenu, index=0, on_change=set_state, args=('selectbox',))
@@ -268,12 +265,9 @@ def main():
                             fig = go.Figure(go.Scatter(x=varX,
                                             y=varY, mode="markers",
                                             marker_symbol="circle",
-                                            marker_color="#464646",
-                                            marker_line_color="#464646",
-                                            marker_line_width=2, marker_size=2,
-                                            #hovertemplate="test",
-                                            #marker=dict(size=40, symbol="line-ew", color="red"),
-                                            name="50% des clients"))
+                                            marker_color=CouleurAccord,
+                                            marker_line_color=CouleurAccord,
+                                            marker_line_width=3, marker_size=3))
                             fig.update_layout(hoverlabel_align = 'auto',title = f"graphique des relations entre {var2Analys2} et {var2Analys1}")
                             fig.update_xaxes(title_text=var2Analys1)
                             fig.update_yaxes(title_text=var2Analys2)
