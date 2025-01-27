@@ -274,7 +274,7 @@ def main():
                                             #hovertemplate="test",
                                             #marker=dict(size=40, symbol="line-ew", color="red"),
                                             name="50% des clients"))
-                            fig.update_layout(hoverlabel_align = 'auto',title = f"graphique des relation de {var2Analys2} en fonction de {var2Analys1}")
+                            fig.update_layout(hoverlabel_align = 'auto',title = f"graphique des relations entre {var2Analys2} et {var2Analys1}")
                             fig.update_xaxes(title_text=var2Analys1)
                             fig.update_yaxes(title_text=var2Analys2)
                             st.plotly_chart(fig, use_container_width=False, theme="streamlit", on_select="ignore")
