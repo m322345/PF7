@@ -245,15 +245,8 @@ def main():
                         st.plotly_chart(fig, use_container_width=False, theme="streamlit", on_select="ignore")
 
 
-                with st.spinner("Merci de patienter, nous calculons l'importance des variables ... "):
-                    model = loadModel(pathMod+'model.pkl')
-                    shap_values_single, shap_values, explainer = visualize_importance(model, user_id, ClientsDatabase)
-
-
-                st.subheader("Explication variable", divider="blue")
+                st.subheader("Analyse des relations entre variables", divider="blue")
                 with st.spinner("Merci de patienter, nous calculons l'explication des variables ... "):
-                    #listeVars = listeVars.remove("SK_ID_CURR")
-                    #listeVars = listeVars.remove("TARGET")
                     listeVars1 = listeVars.copy()
                     listeVars1.insert(0, 'Cliquez ici pour choisir')
                     var2Analys1 = st.selectbox('Première variable a analyser :',listeVars1, index=0)
@@ -266,6 +259,7 @@ def main():
                         if var2Analys2 == 'Cliquez ici pour choisir':
                             st.write(f"Choisissez une deuxième variable dans le menu déroulant ci-dessus")
                         else:
+                            model = loadModel(pathMod+'model.pkl')
                             pipeline = model['pipeline']
                             ClientsDatabaseDroped = DropColumns(ClientsDatabase)
                             ClientsDatabaseTransf = pipeline.transform(DropColumns(ClientsDatabaseDroped))
@@ -280,7 +274,15 @@ def main():
                                             #hovertemplate="test",
                                             #marker=dict(size=40, symbol="line-ew", color="red"),
                                             name="50% des clients"))
+                            fig.update_layout(hoverlabel_align = 'auto',title = f"graphique {var2Analys2} en fonction de {var2Analys1}")
+                            fig.update_xaxes(title_text=var2Analys1)
+                            fig.update_yaxes(title_text=var2Analys2)
                             st.plotly_chart(fig, use_container_width=False, theme="streamlit", on_select="ignore")
+
+
+                with st.spinner("Merci de patienter, nous calculons l'importance des variables ... "):
+                    model = loadModel(pathMod+'model.pkl')
+                    shap_values_single, shap_values, explainer = visualize_importance(model, user_id, ClientsDatabase)
 
 
                 st.subheader("Explication Locale", divider="blue")
