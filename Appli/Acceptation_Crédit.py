@@ -279,8 +279,8 @@ def main():
                             clientIndex = ClientsDatabase.loc[ClientsDatabase.SK_ID_CURR == id_client].index[0]
                             varClientX = ClientsDatabaseTransf[clientIndex,listeVars.index(var2Analys1)]
                             varClientY = ClientsDatabaseTransf[clientIndex,listeVars.index(var2Analys2)]
-                            fig.add_scatter(x=varClientX,
-                                        y=varClientY, mode="markers",
+                            fig.add_scatter(x=[varClientX],
+                                        y=[varClientY], mode="markers",
                                         text=[f"{id_client}"],
                                         marker=dict(size=5, color=CouleurRefus),
                                         hovertemplate="Client %{text}<br>Valeur: %{x:.3f} %{y:.3f}<extra></extra>",
