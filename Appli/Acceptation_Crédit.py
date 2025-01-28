@@ -245,7 +245,7 @@ def main():
                                         marker=dict(size=marker_size, color="#464646"),
                                         hovertemplate="Client %{text}<br>Valeur: %{y:.3f}<extra></extra>",
                                         name=name)
-                        fig.update_layout(hoverlabel_align = 'auto',title = f"Comparaison du client {id_client} par rapport aux autres")
+                        fig.update_layout(hoverlabel_align = 'auto',title = f"Comparaison du client {id_client} par rapport aux autres clients")
                         st.plotly_chart(fig, use_container_width=False, theme="streamlit", on_select="ignore")
 
 
@@ -292,14 +292,14 @@ def main():
 #                    shap_values_single, shap_values, explainer = visualize_importance(model, user_id, ClientsDatabase)
                     fig, ax = plt.subplots(figsize=(5, 5))
                     shap.plots.waterfall(shap_values_single[0], max_display=10)
-                    fig.title(f"Influences sur le score du client {id_client}")
+                    #fig.title(f"Influences sur le score du client {id_client}")
                     st.pyplot(fig)
 
                 st.subheader("Explication Globale", divider="blue")
                 with st.spinner("Merci de patienter, nous calculons l'explication globale ... "):
                     fig, ax = plt.subplots(figsize=(5, 5))
                     shap.summary_plot(shap_values, max_display=10)
-                    fig.title(f"Principales influences sur le modèle")
+                    #fig.title(f"Principales influences sur le modèle")
                     st.pyplot(fig)
     else:
         st.write('')
