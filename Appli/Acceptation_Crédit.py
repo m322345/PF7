@@ -199,6 +199,7 @@ def main():
                                      {'range': [0, Seuil], 'color': CouleurAccord},
                                      {'range': [Seuil, 1], 'color': CouleurRefus}],
                                  'threshold' : {'line': {'color': "white", 'width': 2}, 'thickness': 0.9, 'value': Seuil}}))
+                    jauge.update_layout(hoverlabel_align = 'auto',title = f"Jauge d'acceptation du client {id_client}")
                     st.plotly_chart(jauge, use_container_width=True, theme="streamlit", on_select="ignore")
 
                 st.subheader("Comparaison d\'un client", divider="blue")
@@ -244,6 +245,7 @@ def main():
                                         marker=dict(size=marker_size, color="#464646"),
                                         hovertemplate="Client %{text}<br>Valeur: %{y:.3f}<extra></extra>",
                                         name=name)
+                        fig.update_layout(hoverlabel_align = 'auto',title = f"Comparaison du client {id_client} par rapport aux autres")
                         st.plotly_chart(fig, use_container_width=False, theme="streamlit", on_select="ignore")
 
 
@@ -273,7 +275,7 @@ def main():
                                             marker_color=CouleurAccord,
                                             marker_line_color=CouleurAccord,
                                             marker_line_width=3, marker_size=3))
-                            fig.update_layout(hoverlabel_align = 'auto',title = f"graphique des relations entre {var2Analys2} et {var2Analys1}")
+                            fig.update_layout(hoverlabel_align = 'auto',title = f"Graphique des relations entre {var2Analys2} et {var2Analys1}")
                             fig.update_xaxes(title_text=var2Analys1)
                             fig.update_yaxes(title_text=var2Analys2)
                             st.plotly_chart(fig, use_container_width=False, theme="streamlit", on_select="ignore")
@@ -290,12 +292,14 @@ def main():
 #                    shap_values_single, shap_values, explainer = visualize_importance(model, user_id, ClientsDatabase)
                     fig, ax = plt.subplots(figsize=(5, 5))
                     shap.plots.waterfall(shap_values_single[0], max_display=10)
+                    fig.update_layout(hoverlabel_align = 'auto',title = f"Influences sur le score du client {id_client}")
                     st.pyplot(fig)
 
                 st.subheader("Explication Globale", divider="blue")
                 with st.spinner("Merci de patienter, nous calculons l'explication globale ... "):
                     fig, ax = plt.subplots(figsize=(5, 5))
                     shap.summary_plot(shap_values, max_display=10)
+                    fig.update_layout(hoverlabel_align = 'auto',title = f"Principales influences sur le modèle")
                     st.pyplot(fig)
     else:
         st.write('')
