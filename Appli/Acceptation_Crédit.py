@@ -242,7 +242,7 @@ def main():
                         fig.add_scatter(x=dfGraph.index,
                                         y=dfGraph['client_prc'], mode="markers",
                                         text=[f"{id_client}" for i in range(nb_options)],
-                                        marker=dict(size=marker_size, color="#464646"),
+                                        marker=dict(size=marker_size, color=CouleurRefus),
                                         hovertemplate="Client %{text}<br>Valeur: %{y:.3f}<extra></extra>",
                                         name=name)
                         fig.update_layout(hoverlabel_align = 'auto',title = f"Comparaison du client {id_client} par rapport aux autres clients")
@@ -275,6 +275,16 @@ def main():
                                             marker_color=CouleurAccord,
                                             marker_line_color=CouleurAccord,
                                             marker_line_width=3, marker_size=3))
+                            name = f"Client {id_client}"
+                            clientIndex = ClientsDatabase.loc[ClientsDatabase.SK_ID_CURR == id_client].index[0]
+                            varClientX = ClientsDatabaseTransf.iloc[clientIndex,listeVars.index(var2Analys1)]
+                            varClientY = ClientsDatabaseTransf.iloc[clientIndex,listeVars.index(var2Analys2)]
+                            fig.add_scatter(x=varClientX,
+                                        y=varClientY, mode="markers",
+                                        text=[f"{id_client}"],
+                                        marker=dict(size=5, color=CouleurRefus),
+                                        hovertemplate="Client %{text}<br>Valeur: %{x:.3f} %{y:.3f}<extra></extra>",
+                                        name=name)
                             fig.update_layout(hoverlabel_align = 'auto',title = f"Graphique des relations entre {var2Analys2} et {var2Analys1}")
                             fig.update_xaxes(title_text=var2Analys1)
                             fig.update_yaxes(title_text=var2Analys2)
