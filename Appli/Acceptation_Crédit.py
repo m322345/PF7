@@ -245,7 +245,7 @@ def main():
                                         marker=dict(size=marker_size, color=CouleurRefus),
                                         hovertemplate="Client %{text}<br>Valeur: %{y:.3f}<extra></extra>",
                                         name=name)
-                        fig.update_layout(hoverlabel_align = 'auto',title = f"Comparaison du client {id_client} par rapport aux autres clients")
+                        fig.update_layout(hoverlabel_align = 'auto',title = f"Comparaison du client {id_client} par rapport aux autres clients (données exprimées en % des clients)")
                         st.plotly_chart(fig, use_container_width=False, theme="streamlit", on_select="ignore")
 
 
@@ -274,7 +274,8 @@ def main():
                                             marker_symbol="circle",
                                             marker_color=CouleurAccord,
                                             marker_line_color=CouleurAccord,
-                                            marker_line_width=3, marker_size=3))
+                                            marker_line_width=3, marker_size=3,
+                                            name="Totalité des clients"))
                             name = f"Client {id_client}"
                             clientIndex = ClientsDatabase.loc[ClientsDatabase.SK_ID_CURR == id_client].index[0]
                             varClientX = ClientsDatabaseTransf[clientIndex,listeVars.index(var2Analys1)]
@@ -282,10 +283,10 @@ def main():
                             fig.add_scatter(x=[varClientX],
                                         y=[varClientY], mode="markers",
                                         text=[f"{id_client}"],
-                                        marker=dict(size=5, color=CouleurRefus),
+                                        marker=dict(size=15, color=CouleurRefus),
                                         hovertemplate="Client %{text}<br>Valeur: %{x:.3f} %{y:.3f}<extra></extra>",
                                         name=name)
-                            fig.update_layout(hoverlabel_align = 'auto',title = f"Graphique des relations entre {var2Analys2} et {var2Analys1}")
+                            fig.update_layout(hoverlabel_align = 'auto',title = f"Graphique des relations entre {var2Analys2} et {var2Analys1} (données normalisées)")
                             fig.update_xaxes(title_text=var2Analys1)
                             fig.update_yaxes(title_text=var2Analys2)
                             st.plotly_chart(fig, use_container_width=False, theme="streamlit", on_select="ignore")
