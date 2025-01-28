@@ -277,8 +277,8 @@ def main():
                                             marker_line_width=3, marker_size=3))
                             name = f"Client {id_client}"
                             clientIndex = ClientsDatabase.loc[ClientsDatabase.SK_ID_CURR == id_client].index[0]
-                            varClientX = ClientsDatabaseTransf.iloc[clientIndex,listeVars.index(var2Analys1)]
-                            varClientY = ClientsDatabaseTransf.iloc[clientIndex,listeVars.index(var2Analys2)]
+                            varClientX = ClientsDatabaseTransf[clientIndex,listeVars.index(var2Analys1)]
+                            varClientY = ClientsDatabaseTransf[clientIndex,listeVars.index(var2Analys2)]
                             fig.add_scatter(x=varClientX,
                                         y=varClientY, mode="markers",
                                         text=[f"{id_client}"],
