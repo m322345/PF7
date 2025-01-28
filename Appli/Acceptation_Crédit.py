@@ -11,6 +11,11 @@ import lightgbm
 from pathlib import Path
 import pickle
 
+st.set_page_config(
+    page_title = "Acceptation Crédit",
+    page_icon = ":material/assured_workload:",
+    layout="wide"
+    )
 
 def get_file_number(filename):
     """recuperation du seuil etabli lors de l'elaboration du modele"""
