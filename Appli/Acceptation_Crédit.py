@@ -298,15 +298,14 @@ def main():
 
 
                 st.subheader("Explication Locale", divider="blue")
+                st.markdown(f"<center>Influence des données de l'utilisateur sur la décision finale</center>", unsafe_allow_html=True)
                 with st.spinner("Merci de patienter, nous calculons l'explication locale ... "):
-#                    model = loadModel(pathMod+'model.pkl')
-#                    shap_values_single, shap_values, explainer = visualize_importance(model, user_id, ClientsDatabase)
                     fig, ax = plt.subplots(figsize=(5, 5))
                     shap.plots.waterfall(shap_values_single[0], max_display=10)
-                    #fig.title(f"Influences sur le score du client {id_client}")
                     st.pyplot(fig)
 
                 st.subheader("Explication Globale", divider="blue")
+                st.markdown(f"<center>Données agissant principalement sur le modèle</center>", unsafe_allow_html=True)
                 with st.spinner("Merci de patienter, nous calculons l'explication globale ... "):
                     fig, ax = plt.subplots(figsize=(5, 5))
                     shap.summary_plot(shap_values, max_display=10)
