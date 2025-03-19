@@ -19,7 +19,7 @@ L’objectif est d’aider les chargés de relation client à **expliquer aux cl
 ### 1️⃣ **Planification et Maquettage**
 - Comprendre les **besoins des utilisateurs**.
 - Concevoir des **maquettes simples** avant l’implémentation.
-- Choix de la **technologie** Streamlit**.
+- Choix de la **technologie Streamlit**.
 
 ### 2️⃣ **Développement du Dashboard**
 - **Connexion à l’API de scoring** pour récupérer le score et la classe prédite.
