@@ -2,6 +2,12 @@
 
 # 📌 Conception d’un Dashboard de Credit Scoring
 
+## Les liens vers l'application :
+
+- [Démonstration de l'Application](https://data.ewd.fr/dashboard-p8/)
+- [Démonstration de l'API](https://data.ewd.fr/api-p7)
+- [Test de l'API](https://data.ewd.fr/api-p7/docs/)#
+
 ## 📖 Contexte
 **Prêt à Dépenser** est une société financière spécialisée dans le **crédit à la consommation**. Après avoir développé un **modèle de scoring crédit**, l’entreprise souhaite maintenant améliorer la **transparence des décisions** en mettant à disposition un **dashboard interactif** pour les chargés de relation client.
 
@@ -53,13 +59,6 @@ repertoire			| description
 Api 				| Le code de l'Api qui est déployée automatiquement vers Render lors d'un push
 Appli				| L'application frontend déployée automatiquement vers Streamlit
 tests				| Les tests unitaires réalisés avec Pytest
-
-## Les liens vers l'application :
-
-- [Application hébergée sur Streamlit](https://ocp8-froidure.streamlit.app/)
-- [Dashboard Render](https://dashboard.render.com/)
-- [API hébergée sur Render](https://ocp7-api.onrender.com/)
-- [Test de l'API hébergée sur Render](https://ocp7-api.onrender.com/docs/)
 
 ---
 - 👥 **Compétences requises** : Python, Data Visualization, API, Streamlit.
