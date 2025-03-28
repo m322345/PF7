@@ -6,7 +6,7 @@
 
 - [Démonstration de l'Application](https://data.ewd.fr/dashboard-p8/)
 - [Démonstration de l'API](https://data.ewd.fr/api-p7)
-- [Test de l'API](https://data.ewd.fr/api-p7/docs/)#
+- [Test de l'API](https://data.ewd.fr/api-p7/docs/)
 
 ## 📖 Contexte
 **Prêt à Dépenser** est une société financière spécialisée dans le **crédit à la consommation**. Après avoir développé un **modèle de scoring crédit**, l’entreprise souhaite maintenant améliorer la **transparence des décisions** en mettant à disposition un **dashboard interactif** pour les chargés de relation client.
